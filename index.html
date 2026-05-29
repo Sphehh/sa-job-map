@@ -393,10 +393,8 @@
             const ADZUNA_APP_KEY = '4813406505c3a933d4ac2aaf9ef3a326';
             const ADZUNA_COUNTRY = 'za'; // South Africa
             const RESULTS_PER_PAGE = 60;
-            // Replace the old API_URL line with this relative path:
-            const API_URL = '/.netlify/functions/adzuna-proxy';
-          
-            //const API_URL = `https://api.adzuna.com/v1/api/jobs/${ADZUNA_COUNTRY}/search/1?app_id=${ADZUNA_APP_ID}&app_key=${ADZUNA_APP_KEY}&results_per_page=${RESULTS_PER_PAGE}&content-type=application/json`;
+            const API_URL =
+                `https://api.adzuna.com/v1/api/jobs/${ADZUNA_COUNTRY}/search/1?app_id=${ADZUNA_APP_ID}&app_key=${ADZUNA_APP_KEY}&results_per_page=${RESULTS_PER_PAGE}&content-type=application/json`;
 
             // ──────────────────────────────────────
             // DOM ELEMENTS
@@ -598,7 +596,7 @@
             }
 
             // ──────────────────────────────────────
-            // SAMPLE FALLBACK DATA (if API fails)
+            // SAMPLE FALLBACK DATA (if API fails) — NOW WITH MANY MORE TOWNS
             // ──────────────────────────────────────
             function getSampleJobs() {
                 const companies = [
@@ -628,41 +626,157 @@
                     'Healthcare', 'HR', 'Sales', 'Operations', 'Legal', 'Design',
                 ];
 
+                // Expanded list of locations covering many small towns across SA
                 const locations = [
+                    // Gauteng
                     { city: 'Johannesburg', area: 'Sandton', lat: -26.1075, lng: 28.0567 },
                     { city: 'Johannesburg', area: 'Midrand', lat: -25.9895, lng: 28.1284 },
                     { city: 'Johannesburg', area: 'Rosebank', lat: -26.1456, lng: 28.0416 },
                     { city: 'Johannesburg', area: 'CBD', lat: -26.2041, lng: 28.0473 },
+                    { city: 'Pretoria', area: 'Centurion', lat: -25.8600, lng: 28.1894 },
+                    { city: 'Pretoria', area: 'Menlyn', lat: -25.7810, lng: 28.2753 },
+                    { city: 'Pretoria', area: 'CBD', lat: -25.7479, lng: 28.2293 },
+                    { city: 'Vereeniging', area: 'Vanderbijlpark', lat: -26.6731, lng: 27.9261 },
+                    { city: 'Krugersdorp', area: 'CBD', lat: -26.0851, lng: 27.7752 },
+                    { city: 'Randfontein', area: 'CBD', lat: -26.1687, lng: 27.7015 },
+                    { city: 'Soweto', area: 'Orlando', lat: -26.2669, lng: 27.8623 },
+                    { city: 'Benoni', area: 'CBD', lat: -26.1885, lng: 28.3169 },
+                    { city: 'Boksburg', area: 'CBD', lat: -26.2173, lng: 28.2593 },
+                    { city: 'Springs', area: 'CBD', lat: -26.2559, lng: 28.4012 },
+                    { city: 'Carletonville', area: 'CBD', lat: -26.3579, lng: 27.3968 },
+                    { city: 'Heidelberg', area: 'CBD', lat: -26.4947, lng: 28.3549 },
+                    { city: 'Nigel', area: 'CBD', lat: -26.4247, lng: 28.4783 },
+
+                    // Western Cape
                     { city: 'Cape Town', area: 'Waterfront', lat: -33.9036, lng: 18.4210 },
                     { city: 'Cape Town', area: 'Bellville', lat: -33.8993, lng: 18.6398 },
                     { city: 'Cape Town', area: 'Stellenbosch', lat: -33.9321, lng: 18.8602 },
                     { city: 'Cape Town', area: 'CBD', lat: -33.9249, lng: 18.4241 },
+                    { city: 'George', area: 'CBD', lat: -33.9630, lng: 22.4617 },
+                    { city: 'Mossel Bay', area: 'CBD', lat: -34.1836, lng: 22.1393 },
+                    { city: 'Worcester', area: 'CBD', lat: -33.6451, lng: 19.4434 },
+                    { city: 'Paarl', area: 'CBD', lat: -33.7340, lng: 18.9755 },
+                    { city: 'Oudtshoorn', area: 'CBD', lat: -33.5904, lng: 22.2022 },
+                    { city: 'Beaufort West', area: 'CBD', lat: -32.3518, lng: 22.5831 },
+                    { city: 'Knysna', area: 'CBD', lat: -34.0354, lng: 23.0486 },
+                    { city: 'Plettenberg Bay', area: 'CBD', lat: -34.0520, lng: 23.3765 },
+                    { city: 'Swellendam', area: 'CBD', lat: -34.0227, lng: 20.4416 },
+                    { city: 'Hermanus', area: 'CBD', lat: -34.4187, lng: 19.2345 },
+                    { city: 'Malmesbury', area: 'CBD', lat: -33.4603, lng: 18.7243 },
+                    { city: 'Vredenburg', area: 'CBD', lat: -32.9081, lng: 17.9904 },
+
+                    // KwaZulu-Natal
                     { city: 'Durban', area: 'Umhlanga', lat: -29.7253, lng: 31.0855 },
                     { city: 'Durban', area: 'CBD', lat: -29.8587, lng: 31.0218 },
                     { city: 'Durban', area: 'Westville', lat: -29.8305, lng: 30.9247 },
-                    { city: 'Pretoria', area: 'Centurion', lat: -25.8600, lng: 28.1894 },
-                    { city: 'Pretoria', area: 'Menlyn', lat: -25.7810, lng: 28.2753 },
-                    { city: 'Pretoria', area: 'CBD', lat: -25.7479, lng: 28.2293 },
+                    { city: 'Pietermaritzburg', area: 'CBD', lat: -29.6006, lng: 30.3794 },
+                    { city: 'Richards Bay', area: 'CBD', lat: -28.7807, lng: 32.0383 },
+                    { city: 'Newcastle', area: 'CBD', lat: -27.7584, lng: 29.9316 },
+                    { city: 'Ladysmith', area: 'CBD', lat: -28.5552, lng: 29.7808 },
+                    { city: 'Kokstad', area: 'CBD', lat: -30.5472, lng: 29.4241 },
+                    { city: 'Port Shepstone', area: 'CBD', lat: -30.7414, lng: 30.4547 },
+                    { city: 'Umzimkulu', area: 'CBD', lat: -30.2636, lng: 29.9397 },
+                    { city: 'Ixopo', area: 'CBD', lat: -30.1500, lng: 30.0833 },
+                    { city: 'Port Edward', area: 'CBD', lat: -31.0500, lng: 30.2167 },
+                    { city: 'Bizana', area: 'CBD', lat: -30.8500, lng: 29.8500 },
+                    { city: 'Margate', area: 'CBD', lat: -30.8580, lng: 30.3743 },
+                    { city: 'Scottburgh', area: 'CBD', lat: -30.2861, lng: 30.7545 },
+                    { city: 'Empangeni', area: 'CBD', lat: -28.7411, lng: 31.9002 },
+                    { city: 'Vryheid', area: 'CBD', lat: -27.7665, lng: 30.7915 },
+                    { city: 'Dundee', area: 'CBD', lat: -28.1625, lng: 30.2321 },
+                    { city: 'Greytown', area: 'CBD', lat: -29.0635, lng: 30.5891 },
+                    { city: 'Eshowe', area: 'CBD', lat: -28.8872, lng: 31.4601 },
+
+                    // Eastern Cape
                     { city: 'Port Elizabeth', area: 'Summerstrand', lat: -33.9806, lng: 25.6542 },
                     { city: 'Port Elizabeth', area: 'CBD', lat: -33.9608, lng: 25.6022 },
+                    { city: 'East London', area: 'CBD', lat: -33.0292, lng: 27.8546 },
+                    { city: 'Mthatha', area: 'CBD', lat: -31.5887, lng: 28.7844 },
+                    { city: 'Queenstown', area: 'CBD', lat: -31.9000, lng: 26.8833 },
+                    { city: 'Grahamstown', area: 'CBD', lat: -33.3105, lng: 26.5257 },
+                    { city: 'King William’s Town', area: 'CBD', lat: -32.8755, lng: 27.3918 },
+                    { city: 'Aliwal North', area: 'CBD', lat: -30.6925, lng: 26.7114 },
+                    { city: 'Butterworth', area: 'CBD', lat: -32.3343, lng: 28.1494 },
+                    { city: 'Cradock', area: 'CBD', lat: -32.1708, lng: 25.6184 },
+                    { city: 'Graaff‑Reinet', area: 'CBD', lat: -32.2502, lng: 24.5359 },
+                    { city: 'Jeffreys Bay', area: 'CBD', lat: -34.0383, lng: 24.9250 },
+                    { city: 'Humansdorp', area: 'CBD', lat: -34.0301, lng: 24.7725 },
+
+                    // Free State
                     { city: 'Bloemfontein', area: 'CBD', lat: -29.0852, lng: 26.1596 },
                     { city: 'Bloemfontein', area: 'Brandwag', lat: -29.1087, lng: 26.1843 },
-                    { city: 'East London', area: 'CBD', lat: -33.0292, lng: 27.8546 },
+                    { city: 'Welkom', area: 'CBD', lat: -27.9778, lng: 26.7346 },
+                    { city: 'Bethlehem', area: 'CBD', lat: -28.2330, lng: 28.3077 },
+                    { city: 'Kroonstad', area: 'CBD', lat: -27.6605, lng: 27.2352 },
+                    { city: 'Phuthaditjhaba', area: 'CBD', lat: -28.5275, lng: 28.8123 },
+                    { city: 'Sasolburg', area: 'CBD', lat: -26.8146, lng: 27.8281 },
+                    { city: 'Parys', area: 'CBD', lat: -26.9014, lng: 27.4571 },
+
+                    // Limpopo
                     { city: 'Polokwane', area: 'CBD', lat: -23.8962, lng: 29.4486 },
+                    { city: 'Tzaneen', area: 'CBD', lat: -23.8348, lng: 30.1634 },
+                    { city: 'Mokopane', area: 'CBD', lat: -24.1943, lng: 29.0098 },
+                    { city: 'Musina', area: 'CBD', lat: -22.3475, lng: 30.0314 },
+                    { city: 'Thohoyandou', area: 'CBD', lat: -22.9537, lng: 30.4814 },
+                    { city: 'Louis Trichardt', area: 'CBD', lat: -23.0435, lng: 29.9032 },
+                    { city: 'Phalaborwa', area: 'CBD', lat: -23.9471, lng: 31.1402 },
+
+                    // Mpumalanga
                     { city: 'Nelspruit', area: 'CBD', lat: -25.4745, lng: 30.9703 },
-                    { city: 'Kimberley', area: 'CBD', lat: -28.7282, lng: 24.7499 },
-                    { city: 'Rustenburg', area: 'CBD', lat: -25.6676, lng: 27.2421 },
-                    { city: 'George', area: 'CBD', lat: -33.9630, lng: 22.4617 },
-                    { city: 'Potchefstroom', area: 'CBD', lat: -26.7145, lng: 27.0970 },
-                    { city: 'Vereeniging', area: 'Vanderbijlpark', lat: -26.6731, lng: 27.9261 },
                     { city: 'Witbank', area: 'CBD', lat: -25.8720, lng: 29.2335 },
-                    { city: 'Richards Bay', area: 'CBD', lat: -28.7807, lng: 32.0383 },
-                    { city: 'Mthatha', area: 'CBD', lat: -31.5887, lng: 28.7844 },
-                    { city: 'Pietermaritzburg', area: 'CBD', lat: -29.6006, lng: 30.3794 },
+                    { city: 'Secunda', area: 'CBD', lat: -26.5195, lng: 29.1739 },
+                    { city: 'Ermelo', area: 'CBD', lat: -26.5223, lng: 29.9853 },
+                    { city: 'Middelburg', area: 'CBD', lat: -25.7768, lng: 29.4631 },
+                    { city: 'Standerton', area: 'CBD', lat: -26.9398, lng: 29.2410 },
+                    { city: 'Piet Retief', area: 'CBD', lat: -27.0072, lng: 30.8041 },
+                    { city: 'Barberton', area: 'CBD', lat: -25.7883, lng: 31.0498 },
+                    { city: 'Sabie', area: 'CBD', lat: -25.0962, lng: 30.7791 },
+
+                    // North West
+                    { city: 'Rustenburg', area: 'CBD', lat: -25.6676, lng: 27.2421 },
+                    { city: 'Potchefstroom', area: 'CBD', lat: -26.7145, lng: 27.0970 },
+                    { city: 'Klerksdorp', area: 'CBD', lat: -26.8531, lng: 26.6667 },
+                    { city: 'Mahikeng', area: 'CBD', lat: -25.8656, lng: 25.6444 },
+                    { city: 'Brits', area: 'CBD', lat: -25.6343, lng: 27.7804 },
+                    { city: 'Orkney', area: 'CBD', lat: -26.9814, lng: 26.6705 },
+                    { city: 'Zeerust', area: 'CBD', lat: -25.5409, lng: 26.0740 },
+
+                    // Northern Cape
+                    { city: 'Kimberley', area: 'CBD', lat: -28.7282, lng: 24.7499 },
+                    { city: 'Upington', area: 'CBD', lat: -28.4572, lng: 21.2426 },
+                    { city: 'Springbok', area: 'CBD', lat: -29.6655, lng: 17.8861 },
+                    { city: 'De Aar', area: 'CBD', lat: -30.6517, lng: 24.0127 },
+                    { city: 'Colesberg', area: 'CBD', lat: -30.7210, lng: 25.0974 },
+                    { city: 'Kuruman', area: 'CBD', lat: -27.4625, lng: 23.4264 },
+                    { city: 'Postmasburg', area: 'CBD', lat: -28.3279, lng: 23.0755 },
+
+                    // Even more small / rural towns
+                    { city: 'Ceres', area: 'CBD', lat: -33.3694, lng: 19.3123 },
+                    { city: 'Clanwilliam', area: 'CBD', lat: -32.1794, lng: 18.9008 },
+                    { city: 'Calvinia', area: 'CBD', lat: -31.4757, lng: 19.7724 },
+                    { city: 'Sutherland', area: 'CBD', lat: -32.3983, lng: 20.6611 },
+                    { city: 'Willowmore', area: 'CBD', lat: -33.2942, lng: 23.4886 },
+                    { city: 'Jansenville', area: 'CBD', lat: -32.9440, lng: 24.6663 },
+                    { city: 'Adelaide', area: 'CBD', lat: -32.7075, lng: 26.2948 },
+                    { city: 'Burgersdorp', area: 'CBD', lat: -30.9966, lng: 26.3262 },
+                    { city: 'Hofmeyr', area: 'CBD', lat: -31.0390, lng: 25.8038 },
+                    { city: 'Molteno', area: 'CBD', lat: -31.3982, lng: 26.3642 },
+                    { city: 'Steynsburg', area: 'CBD', lat: -31.2977, lng: 25.8210 },
+                    { city: 'Ventersburg', area: 'CBD', lat: -28.0855, lng: 27.1355 },
+                    { city: 'Bothaville', area: 'CBD', lat: -27.3896, lng: 26.6209 },
+                    { city: 'Viljoenskroon', area: 'CBD', lat: -27.2098, lng: 26.9495 },
+                    { city: 'Warden', area: 'CBD', lat: -27.8543, lng: 28.9627 },
+                    { city: 'Frankfort', area: 'CBD', lat: -27.2748, lng: 28.4934 },
+                    { city: 'Reitz', area: 'CBD', lat: -27.7884, lng: 28.4203 },
+                    { city: 'Senekal', area: 'CBD', lat: -28.3288, lng: 27.6199 },
+                    { city: 'Marquard', area: 'CBD', lat: -28.6690, lng: 27.4375 },
+                    { city: 'Ficksburg', area: 'CBD', lat: -28.8713, lng: 27.8719 },
+                    { city: 'Clocolan', area: 'CBD', lat: -28.9136, lng: 27.5699 },
+                    { city: 'Ladybrand', area: 'CBD', lat: -29.1945, lng: 27.4570 },
                 ];
 
                 const sampleJobs = [];
-                for (let i = 0; i < 50; i++) {
+                for (let i = 0; i < 80; i++) {   // increased count to show more towns
                     const loc = locations[Math.floor(Math.random() * locations.length)];
                     const company = companies[Math.floor(Math.random() * companies.length)];
                     const title = jobTitles[Math.floor(Math.random() * jobTitles.length)];
@@ -838,4 +952,4 @@
         })();
     </script>
 </body>
-</html>
+    </html>
